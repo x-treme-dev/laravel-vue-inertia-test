@@ -15,6 +15,12 @@
                     About
                 </Link>
             </li>
+
+              <li> 
+                <Link :href="route('users.index')">
+                    Users
+                </Link>
+            </li>
         </ul>
         <main>
             <slot /> <!-- Сюда подставляется конкретная страница -->
