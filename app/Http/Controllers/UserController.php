@@ -13,6 +13,8 @@ class UserController extends Controller
      */
     public function index()
     {
+        //dd(User::paginate(5)->toArray());
+
         return Inertia::render('Users/Index', [
             'title' => 'Users page',
             'users' => User::paginate(5)

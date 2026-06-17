@@ -1,6 +1,10 @@
 // app.js
+import 'bootstrap';  
+import 'bootstrap/dist/css/bootstrap.min.css' // 👈 Добавьте импорт CSS
+import 'bootstrap/dist/js/bootstrap.bundle.min.js' // 👈 Добавьте импорт JS
 import { createApp, h } from 'vue'
 import { createInertiaApp } from '@inertiajs/vue3'
+
 
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
 import Layout from './shared/Layout.vue';
