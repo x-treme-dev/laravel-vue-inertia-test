@@ -7,9 +7,9 @@
         <div class="card shadow-sm">
             <div class="card-header bg-white py-3">
                 <div class="d-flex justify-content-between align-items-center">
-                    <button class="btn btn-primary btn-sm">
+                    <Link :href="route('users.create') "class="btn btn-primary btn-sm">
                         <i class="bi bi-person-plus"></i> Добавить пользователя
-                    </button>
+                    </Link>
                 </div>
             </div>
             <div class="card-body">
@@ -30,7 +30,7 @@
                                     <button class="btn btn-sm btn-outline-primary me-1" title="Редактировать">
                                         Редактировать
                                     </button>
-                                    <button class="btn btn-sm btn-outline-danger" title="Удалить">
+                                    <button @click="destroy(user.id)" class="btn btn-sm btn-outline-danger" title="Удалить">
                                          Удалить
                                     </button>
                                 </td>
@@ -38,6 +38,7 @@
             
                         </tbody>
                     </table>
+                    <Pagination :links="users.links"/>
                 </div>
                  <div v-else class="card-footer bg-white">
                 <small class="text-muted">Пользователей пока нет</small>
@@ -49,15 +50,27 @@
 </template>
 
 <script>
-import { Head } from '@inertiajs/vue3'
+import { Head, Link } from '@inertiajs/vue3'
+import Pagination from '@/shared/Pagination.vue';
 
 export default {
     components: {
-        Head
+        Head,
+        Link,
+        Pagination,
     },
     props: {
         title: String,
         users: Array
+    },
+    methods:{
+        destroy(id){
+            if(confirm("Вы уверены?")){
+                this.$inertia.delete(this.route('users.destroy', id));
+            }
+        }
     }
 }
+
+
 </script>

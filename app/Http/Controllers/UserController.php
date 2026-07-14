@@ -27,6 +27,9 @@ class UserController extends Controller
     public function create()
     {
         //
+         return Inertia::render('Users/Create', [
+            'title' => 'Users page',
+        ]);
     }
 
     /**
@@ -35,6 +38,18 @@ class UserController extends Controller
     public function store(Request $request)
     {
         //
+            $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|min:8',
+        ]);
+
+        User::create([
+            'name' => $validated['name'],
+            'email' => $validated['email'],
+            'password' => bcrypt($validated['password']),
+        ]);
+        return redirect()->route('users.index');
     }
 
     /**
@@ -67,5 +82,7 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         //
+        $user->delete();
+        return redirect()->back();
     }
 }
